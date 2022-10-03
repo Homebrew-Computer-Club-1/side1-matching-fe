@@ -43,8 +43,9 @@ export default function LoginPage() {
       <Title>Matching Service</Title>
       <LoginWrapper>
         <YoutubeLogo src={youtubeLogo}/>
-        <LoginBtn onClick={onClickLoginBtn}>Sign In With Youtube</LoginBtn>
-        <Link to="/auth/inputUserInfo">sdfds</Link>
+        <Link to="/auth/inputUserInfo/name">
+          <LoginBtn onClick={onClickLoginBtn}>Sign In With Youtube</LoginBtn>
+        </Link>
       </LoginWrapper>
     </Wrapper>
   );

@@ -3,6 +3,7 @@ import LoginPage from "./LoginPage";
 import InputUserInfo from "./InputUserInfo";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import './transitionGroup.css'
+import { InputName, InputAge } from "../components/InputUserInfo/InputTemplates";
 
 export default function Router(){
     const location = useLocation();
@@ -15,7 +16,10 @@ export default function Router(){
             >
                 <Routes>
                     <Route path="/auth/login" element={<LoginPage/>}></Route>
-                    <Route path="/auth/inputUserInfo" element={<InputUserInfo/>}></Route>
+                    <Route path="/auth/inputUserInfo" element={<InputUserInfo/>}>
+                        <Route path={`name`} element={<InputName/>}></Route>
+                        <Route path={`age`} element={<InputAge/>}></Route>   
+                    </Route>
                 </Routes>
             </CSSTransition>
         </TransitionGroup>
