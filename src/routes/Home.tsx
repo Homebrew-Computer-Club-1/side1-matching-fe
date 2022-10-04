@@ -19,7 +19,7 @@ export default function Home(){
         <>
             <h1>this is home</h1>
             {allUserDatas.map(userData => 
-                <UserCard key={userData.id} name={userData.name} age={userData.age}></UserCard>  
+                <UserCard key={userData.googleId} name={userData.name} age={userData.age}></UserCard>  
             )}
         </>
     );

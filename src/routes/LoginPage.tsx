@@ -1,6 +1,5 @@
 import styled from "styled-components"
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { SERVER_URL } from "../api";
 const youtubeLogo = require("../images/youtube.png");
 
 const Wrapper = styled.div`
@@ -35,7 +34,7 @@ const LoginWrapper = styled.div`
 
 export default function LoginPage() {
   const onClickLoginBtn = () => {
-    console.log('hi')
+    window.location.replace(`${SERVER_URL}/auth/google`)
   }
 
   return (
@@ -43,9 +42,7 @@ export default function LoginPage() {
       <Title>Matching Service</Title>
       <LoginWrapper>
         <YoutubeLogo src={youtubeLogo}/>
-        <Link to="/auth/inputUserInfo/name">
           <LoginBtn onClick={onClickLoginBtn}>Sign In With Youtube</LoginBtn>
-        </Link>
       </LoginWrapper>
     </Wrapper>
   );
