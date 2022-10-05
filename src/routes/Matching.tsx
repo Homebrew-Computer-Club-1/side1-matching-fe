@@ -1,25 +1,39 @@
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { fetchPostMatching, fetchGetGoogleId } from "../api";
 import {useQuery} from "react-query";
-import { IuserData, userInfoDataAtom } from "../atoms";
-import axios from "axios";
+import { IuserData, ImatchingResult, userInfoDataAtom, currentUserDataAtom } from "../atoms";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Matching(){
-    const [matching,setMatching] = useState(true);
+    const [matchingFinished,setMatchingFinished] = useState(false);
     const userInfoData = useRecoilValue(userInfoDataAtom);
-    const onSuccess = async () => {
-        const userData : IuserData = {googleId : googleId as any, ...userInfoData};
-        const result = await fetchPostMatching(userData);
-        setMatching(false);
-        console.log(result) // 이부분 useQuery로 예쁘게
+    const navigate = useNavigate();
+    const [currentUserData,setCurrentUserData] = useRecoilState(currentUserDataAtom);
+
+    const onGoogleIdSuccess = (data : {googleId : string}) => {
+        setCurrentUserData({googleId : data.googleId, ...userInfoData})
+        console.log(userInfoData)
     }
-    const {isLoading : googleIdLoading , data : googleId} = useQuery<{googleId : string}>("googleId",()=>fetchGetGoogleId(),{onSuccess});
+    const onGoogleIdError  = () => {
+        console.log("failed")
+    }
+
+    const onMatchingSuccess = () => {
+        setMatchingFinished(true);
+        navigate('/home')
+    }
+    const {isLoading : googleIdLoading , data : googleId} = useQuery<{googleId : string}>("googleId",fetchGetGoogleId,{onSuccess : onGoogleIdSuccess,onError: onGoogleIdError});
+    const {isLoading : matching , data: matchingResult} = useQuery<ImatchingResult>("matchingResult",()=> fetchPostMatching(currentUserData),{onSuccess : onMatchingSuccess , enabled:!googleIdLoading})
+
     
+    // setMatching(false);
+    // navigate('/home')
+
     return (
         <>
-            {matching ? <h1>Matching....</h1> : <h1>Complete!</h1>}
+            {!matchingFinished ? <h1>Matching....</h1> : <h1>Complete!</h1>}
         </>
     );
 }

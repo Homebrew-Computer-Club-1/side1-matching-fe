@@ -1,17 +1,12 @@
 import axios from "axios";
 import { IuserData } from "./atoms";
+import { ImatchingResult } from "./atoms";
 
-interface ImatchingResult {
-    allOtherUsers : IuserData[];
-    mlResult : [string];
-}
-
-export const SERVER_URL = `http://localhost:8080`;
 
 export function fetchPostMatching(userData : IuserData){
-    return axios.post<ImatchingResult>(`${SERVER_URL}/`,userData).then(res => res.data)
+    return axios.post<ImatchingResult>(`/insertUserData`,userData).then(res => res.data)
 }
 
 export function fetchGetGoogleId(){
-    return axios.get(`${SERVER_URL}/get-google-id`).then(res => res.data)
+    return axios.get<{googleId:string}>(`/getGoogleId`,{withCredentials:true}).then(res => res.data)
 }

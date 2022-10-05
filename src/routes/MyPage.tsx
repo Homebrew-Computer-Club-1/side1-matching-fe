@@ -1,4 +1,6 @@
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { currentUserDataAtom } from "../atoms";
 
 const Wrapper = styled.div`
     
@@ -16,13 +18,18 @@ const UserDetail = styled.div`
 `
 
 export default function MyPage(){
+    const [currentUserData,setCurrentUserData] = useRecoilState(currentUserDataAtom);
     return (
         <>
             <h1>this is my page</h1>
             <Wrapper>
                 <UserInFoWrapper>
                     <UserImg></UserImg>
-                    <UserDetail></UserDetail>
+                    <UserDetail>
+                        <p>user id : {currentUserData.googleId}</p>
+                        <p>user name : {currentUserData.name}</p>
+                        <p>user age : {currentUserData.age}</p>
+                    </UserDetail>
                 </UserInFoWrapper>
             </Wrapper>
         </>

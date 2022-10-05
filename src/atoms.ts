@@ -10,6 +10,11 @@ export interface IuserData {
     age:number;
 }
 
+export interface ImatchingResult {
+    allOtherUsers : IuserData[];
+    mlResult : [string];
+}
+
 export const isLightModeAtom = atom({
     key:"isLightMode",
     default:true,
@@ -25,7 +30,7 @@ export const allUserDatasAtom = atom<IuserData[]>({
     default:[]
 })
 
-export const currentUserAtom = atom<IuserData>({
+export const currentUserDataAtom = atom<IuserData>({
     key : "currentUser",
     default : {} as any
 });

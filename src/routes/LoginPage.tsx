@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { SERVER_URL } from "../api";
 const youtubeLogo = require("../images/youtube.png");
 
 const Wrapper = styled.div`
@@ -34,7 +33,7 @@ const LoginWrapper = styled.div`
 
 export default function LoginPage() {
   const onClickLoginBtn = () => {
-    window.location.replace(`${SERVER_URL}/auth/google`)
+    window.location.replace(`${process.env.REACT_APP_SERVER_URL}/auth/google`)
   }
 
   return (
