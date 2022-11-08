@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { allUserDatasAtom } from "../atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { allUserDatasAtom, currentUserDataAtom } from "../atoms";
 import UserCard from "../components/Home/UserCard";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";

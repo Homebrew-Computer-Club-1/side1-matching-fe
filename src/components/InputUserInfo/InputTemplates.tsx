@@ -35,7 +35,8 @@ export function InputName(){
 
     const onClickNextPageBtn = () => {
         const userName = nameInput.current?.value;
-        if (userName){
+        const stringRegExp = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
+        if (userName && stringRegExp.test(userName)){
             setUserInfoData(current => {
                 navigate('/auth/InputUserInfo/age')
                 return produce(current,(draft) => {
@@ -44,7 +45,7 @@ export function InputName(){
                 })
             })
         } else {
-            alert('이름을 입력해라.')
+            alert('이름을 한/영 형식으로 입력해주세요.')
             nameInput.current?.focus();
         }
     }
@@ -59,22 +60,23 @@ export function InputName(){
 
 export function InputAge(){
     const ageInput = useRef<HTMLInputElement>(null);
-    const useAge = ageInput.current?.value;
+    const userAge = ageInput.current?.value;
     const [userInfoData,setUserInfoData] = useRecoilState(userInfoDataAtom);
     const navigate = useNavigate();
 
     const onClickNextBtn = ()=> {
-        const useAge = ageInput.current?.value;
-        if (useAge){
+        const userAge = ageInput.current?.value;
+        const numberRegExp = /[0-9]/g;
+        if (userAge && numberRegExp.test(userAge)){
             setUserInfoData(current => {
                 navigate('/matching') 
                 return produce(current,(draft) => {
-                    draft.age = +useAge;
+                    draft.age = +userAge;
                     return draft;
                 })
             })
         } else  {
-            alert('나이를 입력해라.')
+            alert('나이를 숫자 형식으로만 입력해 주세요')
             ageInput.current?.focus();
         }
     }

@@ -19,6 +19,7 @@ const UserDetail = styled.div`
 
 export default function MyPage(){
     const [currentUserData,setCurrentUserData] = useRecoilState(currentUserDataAtom);
+    console.log(currentUserData)
     return (
         <>
             <h1>this is my page</h1>

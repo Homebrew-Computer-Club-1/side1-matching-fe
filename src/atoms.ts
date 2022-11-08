@@ -4,6 +4,7 @@ interface IuserInfoData {
     age:number;
 }
 
+
 export interface IuserData {
     googleId:string;
     name:string;
@@ -31,6 +32,6 @@ export const allUserDatasAtom = atom<IuserData[]>({
 })
 
 export const currentUserDataAtom = atom<IuserData>({
-    key : "currentUser",
+    key : "currentUserData",
     default : {} as any
 });
