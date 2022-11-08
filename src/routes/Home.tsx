@@ -27,7 +27,7 @@ export default function Home(){
     return (
         <>
             <h1>this is home</h1>
-            {allUserDatas.map(userData => 
+            {allUserDatas?.map(userData => 
                 <UserCard key={userData.googleId} name={userData.name} age={userData.age}></UserCard>  
             )}
             <NavBar></NavBar>

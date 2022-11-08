@@ -4,7 +4,6 @@ interface IuserInfoData {
     age:number;
 }
 
-
 export interface IuserData {
     googleId:string;
     name:string;
@@ -12,9 +11,10 @@ export interface IuserData {
 }
 
 export interface ImatchingResult {
-    allOtherUsers : IuserData[];
-    mlResult : [string];
+    allUserDatas : IuserData[];
+    mlResult : string[];
 }
+
 
 export const isLightModeAtom = atom({
     key:"isLightMode",
@@ -35,3 +35,8 @@ export const currentUserDataAtom = atom<IuserData>({
     key : "currentUserData",
     default : {} as any
 });
+
+export const mlResultAtom = atom<string[]>({
+    key : "mlResult",
+    default : []
+})
