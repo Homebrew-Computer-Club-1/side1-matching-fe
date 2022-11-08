@@ -1,6 +1,7 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { currentUserDataAtom } from "../atoms";
+import { NavBar } from "../components/NavBar";
 
 const Wrapper = styled.div`
     
@@ -32,6 +33,7 @@ export default function MyPage(){
                         <p>user age : {currentUserData.age}</p>
                     </UserDetail>
                 </UserInFoWrapper>
+                <NavBar></NavBar>
             </Wrapper>
         </>
     );
