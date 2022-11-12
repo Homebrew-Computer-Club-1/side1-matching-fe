@@ -1,11 +1,10 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "proxy": "https://side1-matching.herokuapp.com/",
   "private": true,
-  "engines":{
-    "node":"18.12.0",
-    "npm":"8.19.2"
+  "engines": {
+    "node": "18.12.0",
+    "npm": "8.19.2"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
@@ -42,7 +41,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild" : "npm run build"
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": [
