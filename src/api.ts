@@ -4,7 +4,7 @@ import { IuserData } from "./atoms";
 import { ImatchingResult } from "./atoms";
 
 const instance = axios.create({
-    baseURL: "https://side1-matching.herokuapp.com",
+    baseURL: `${process.env.REACT_APP_SERVER_URL}`,
   });
 
 

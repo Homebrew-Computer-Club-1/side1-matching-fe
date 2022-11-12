@@ -6,7 +6,7 @@ module.exports = function (app) {
   app.use(
     createProxyMiddleware("/api", {
       // 백엔드 주소
-      target: "https://side1-matching.herokuapp.com",
+      target: `${process.env.REACT_APP_SERVER_URL}`,
       changeOrigin: true,
     })
   );
