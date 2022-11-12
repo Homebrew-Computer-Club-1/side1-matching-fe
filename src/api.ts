@@ -1,27 +1,21 @@
 import axios from "axios";
 import { QueryStatus } from "react-query";
-import { IuserData } from "./atoms";
+import { IcurrentUserDataFromBe, IuserData } from "./atoms";
 import { ImatchingResult } from "./atoms";
 
-const instance = axios.create({
-    baseURL: `${process.env.REACT_APP_SERVER_URL}`,
-  });
 
-
-
-
-export function fetchPostInsertCurrentUserDataOnBE(userData : IuserData){
-    return instance.post<QueryStatus>(`/api/insert-userData`,userData).then(res => res.data)
+export function fetchPostUpdateCurrentUserInfoOnBE(userData : IuserData){
+    return axios.post<QueryStatus>(`/update-user-info`,userData,{withCredentials:true}).then(res => res.data)
 }
 
 export function fetchGetGoogleId(){
-    return instance.get<{googleId:string}>(`/api/get-googleId`).then(res => res.data)
+    return axios.get<{googleId:string}>(`/get-google-id`,{withCredentials:true}).then(res => res.data)
 }
 
 export function fetchGetCurrentUserData(){
-    return instance.get<IuserData>(`/api/get-currentUserData`).then(res => res.data)
+    return axios.get<IcurrentUserDataFromBe>(`/get-current-user-data`,{withCredentials:true}).then(res => res.data)
 }
 export function fetchGetMatching(){
-    return instance.get<ImatchingResult>(`/api/match`).then(res => res.data)
+    return axios.get<ImatchingResult>(`/match`,{withCredentials:true}).then(res => res.data)
 
 }

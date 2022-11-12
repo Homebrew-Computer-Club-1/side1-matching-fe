@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil"
-import { fetchPostInsertCurrentUserDataOnBE, fetchGetGoogleId, fetchGetCurrentUserData,fetchGetMatching } from "../api";
+import { fetchPostUpdateCurrentUserInfoOnBE, fetchGetGoogleId, fetchGetCurrentUserData,fetchGetMatching } from "../api";
 import {QueryStatus, useQuery} from "react-query";
-import { ImatchingResult, userInfoDataAtom, currentUserDataAtom, allUserDatasAtom, mlResultAtom, IuserData } from "../atoms";
+import { ImatchingResult, userInfoDataAtom, currentUserDataAtom, allUserDatasAtom, mlResultAtom, IuserData, IcurrentUserDataFromBe } from "../atoms";
 import { useNavigate } from "react-router-dom";
 
 
@@ -15,35 +15,37 @@ export default function Matching(){
     const [mlResult,setMlResult] = useRecoilState(mlResultAtom);
 
         // 1. 회원가입 하는 유저
-        const onGoogleIdSuccess = (data : {googleId : string}) => {
-            const newData = {googleId : data.googleId, ...userInfoData};
-            setCurrentUserData(current => {
-                return newData
-            });
-        }
-        const onGoogleIdError = () => {
-            console.log("failed to get googleId from server")
-        }
-        const {isLoading : googleIdLoading , data : googleId} = useQuery<{googleId : string}>("googleId",fetchGetGoogleId,{onSuccess : onGoogleIdSuccess,onError: onGoogleIdError,enabled:Boolean(userInfoData.age)});
-       
-            // 1.5. insert-userData on BE
-            const onInsertCurrentUserDataOnBESuccess = () => {
+            // 1) googleID 받아서 -> setCurrentUSerData
+            const onGoogleIdSuccess = (data : {googleId : string}) => {
+                const newData = {googleId : data.googleId, ...userInfoData};
+                console.log("newData",newData)
+                setCurrentUserData(current => {
+                    return newData
+                });
             }
-            const onInsertCurrentUserDataOnBEError = () => {   
+            const onGoogleIdError = () => {
+                console.log("failed to get googleId from server")
+            }
+            const {data : googleId} = useQuery<{googleId : string}>("googleId",fetchGetGoogleId,{onSuccess : onGoogleIdSuccess,onError: onGoogleIdError,enabled:Boolean(userInfoData.age)});
+        
+            
+            // 2) update-user-info on BE
+            const onUpdateCurrentUserInfoOnBESuccess = () => {
+                console.log("1-2)")
+            }
+            const onUpdateCurrentUserInfoOnBEError = () => {   
             }
 
-            const {isLoading : InsertCurrentUserDataOnBELoading , data : InsertCurrentUserDataOnServerSuccess} = useQuery<QueryStatus>("InsertCurrentUserData",()=> fetchPostInsertCurrentUserDataOnBE(currentUserData),{onSuccess : onInsertCurrentUserDataOnBESuccess,onError: onInsertCurrentUserDataOnBEError,enabled:Boolean(currentUserData.googleId&&userInfoData.age)});
-
-        // 1. 로그인 하는 유저
-        const onCurrentUserDataSuccess = (data : IuserData) => {
-            setCurrentUserData(current => data);
-            console.log(data)
-            console.log(currentUserData)
+            const {data : InsertCurrentUserDataOnServerSuccess} = useQuery<QueryStatus>("InsertCurrentUserData",()=> fetchPostUpdateCurrentUserInfoOnBE(currentUserData),{onSuccess : onUpdateCurrentUserInfoOnBESuccess,onError: onUpdateCurrentUserInfoOnBEError,enabled:Boolean(googleId&&userInfoData.age)});
+        // 2. 로그인 하는 유저
+        const onCurrentUserDataSuccess = (data : IcurrentUserDataFromBe) => {
+            console.log("TLqkf")
+            setCurrentUserData({googleId:data.google_id,name:data.name,age:data.age});
         }
         const onCurrentUserDataError = () => {
             console.log("failed to get currentUserData from server")
         }
-        const {isLoading : currentUserDataLoading, data : currentUserData_BE} = useQuery<IuserData>("currentUserData_BE",fetchGetCurrentUserData,{onSuccess : onCurrentUserDataSuccess,enabled:Boolean(!userInfoData.age)})
+        const {isLoading : currentUserDataLoading, data : currentUserData_BE} = useQuery<{google_id:string,name:string,age:number}>("currentUserData_BE",fetchGetCurrentUserData,{onSuccess : onCurrentUserDataSuccess,enabled:Boolean(!userInfoData.age)})
 
         // 매칭
         const onMatchingSuccess = (data : ImatchingResult) => {
@@ -52,7 +54,7 @@ export default function Matching(){
             setMlResult(data.mlResult);
             navigate('/home')
         }
-        const {isLoading : matching , data: matchingResult} = useQuery<ImatchingResult>("matchingResult",fetchGetMatching,{onSuccess : onMatchingSuccess , enabled:!InsertCurrentUserDataOnBELoading||!currentUserDataLoading})
+        const {isLoading : matching , data: matchingResult} = useQuery<ImatchingResult>("matchingResult",fetchGetMatching,{onSuccess : onMatchingSuccess , enabled:Boolean(googleId||currentUserData_BE)})
 
 
     return (

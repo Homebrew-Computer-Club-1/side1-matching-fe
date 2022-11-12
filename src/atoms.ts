@@ -10,6 +10,12 @@ export interface IuserData {
     age:number;
 }
 
+export interface IcurrentUserDataFromBe {
+    google_id:string;
+    name:string;
+    age:number;
+}
+
 export interface ImatchingResult {
     allUserDatas : IuserData[];
     mlResult : string[];
