@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil"
-import { fetchPostUpdateCurrentUserInfoOnBE, fetchGetGoogleId, fetchGetCurrentUserData,fetchGetMatching } from "../api";
+import { fetchPostUpdateCurrentUserInfoOnBE, fetchGetGoogleId, fetchGetCurrentUserData,fetchGetMatching, fetchGetSaveYoutubeApi } from "../api";
 import {QueryStatus, useQuery} from "react-query";
 import { ImatchingResult, userInfoDataAtom, currentUserDataAtom, allUserDatasAtom, mlResultAtom, IuserData, IcurrentUserDataFromBe } from "../atoms";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ export default function Matching(){
     const [currentUserData,setCurrentUserData] = useRecoilState(currentUserDataAtom);
     const [allUserDatas,setAllUserDatas] = useRecoilState(allUserDatasAtom);
     const [mlResult,setMlResult] = useRecoilState(mlResultAtom);
+    const [youtubeApiFin,setYoutubeApiFin] = useState(false);
 
         // 1. 회원가입 하는 유저
             // 1) googleID 받아서 -> setCurrentUSerData
@@ -47,6 +48,14 @@ export default function Matching(){
         }
         const {isLoading : currentUserDataLoading, data : currentUserData_BE} = useQuery<{google_id:string,name:string,age:number}>("currentUserData_BE",fetchGetCurrentUserData,{onSuccess : onCurrentUserDataSuccess,enabled:Boolean(!userInfoData.age)})
 
+        // youtube_api 갱신
+        const onSaveYoutubeApiSuccess = () => {
+            console.log("YOUTUBE FIN")
+            setYoutubeApiFin(true);
+        }
+
+        const {isLoading : youtube_apiLoading , data: youtube_apiResult} = useQuery<QueryStatus>("youtube_apiResult",fetchGetSaveYoutubeApi,{onSuccess:onSaveYoutubeApiSuccess,enabled:Boolean(googleId||currentUserData_BE)})
+
         // 매칭
         const onMatchingSuccess = (data : ImatchingResult) => {
             setMatchingFinished(true);
@@ -54,7 +63,7 @@ export default function Matching(){
             setMlResult(data.mlResult);
             navigate('/home')
         }
-        const {isLoading : matching , data: matchingResult} = useQuery<ImatchingResult>("matchingResult",fetchGetMatching,{onSuccess : onMatchingSuccess , enabled:Boolean(googleId||currentUserData_BE)})
+        const {isLoading : matching , data: matchingResult} = useQuery<ImatchingResult>("matchingResult",fetchGetMatching,{onSuccess : onMatchingSuccess , enabled:youtubeApiFin})
 
 
     return (

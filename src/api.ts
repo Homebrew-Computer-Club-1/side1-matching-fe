@@ -19,3 +19,6 @@ export function fetchGetMatching(){
     return axios.get<ImatchingResult>(`/match`,{withCredentials:true}).then(res => res.data)
 
 }
+export function fetchGetSaveYoutubeApi(){
+    return axios.get<QueryStatus>(`/youtube/save-youtube-data`,{withCredentials:true}).then(res => res.data)
+}
