@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { allUserDatasAtom, currentUserDataAtom } from "../atoms";
+import { allUserDatasAtom, currentUserDataAtom, IuserData, mlResultAtom } from "../atoms";
 import UserCard from "../components/Home/UserCard";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -21,13 +21,30 @@ const ToMyPageBtn = styled.button`
 
 export default function Home(){
     const [allUserDatas,setAllUserDatas] = useRecoilState(allUserDatasAtom);
-    useEffect(()=> {
-        // 서버에 데이터 요청하고 받아서 -> allUserDatas에 저장하는 로직
+    const mlResult = useRecoilValue(mlResultAtom);
+    const [sortedAllUserDatas,setSortedAllUserDatas] = useState<IuserData[]>([]);
+    console.log("all",allUserDatas,"ml",mlResult)
+
+    
+    const sortAllUserDatas = (allUserDatas : IuserData[]) => {
+        const result = [];
+        for (let i=0;i<allUserDatas.length;i++){
+            let pushUserData = allUserDatas.find(userData => userData.googleId === mlResult[i]);
+            result.push(pushUserData);
+        }
+        return result;
+    }
+
+
+
+    useEffect(()=>{
+        setSortedAllUserDatas(sortAllUserDatas(allUserDatas) as IuserData[]);
     },[])
+
     return (
         <>
             <h1>this is home</h1>
-            {allUserDatas?.map(userData => 
+            {sortedAllUserDatas.map(userData => 
                 <UserCard key={userData.googleId} name={userData.name} age={userData.age}></UserCard>  
             )}
             <NavBar></NavBar>

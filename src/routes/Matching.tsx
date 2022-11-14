@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil"
-import { fetchPostUpdateCurrentUserInfoOnBE, fetchGetGoogleId, fetchGetCurrentUserData,fetchGetMatching, fetchGetSaveYoutubeApi } from "../api";
+import { fetchPostUpdateCurrentUserInfoOnBE, fetchGetGoogleId, fetchGetCurrentUserData,fetchGetMatch, fetchGetSaveYoutubeApi, fetchGetallUserDatas } from "../api";
 import {QueryStatus, useQuery} from "react-query";
-import { ImatchingResult, userInfoDataAtom, currentUserDataAtom, allUserDatasAtom, mlResultAtom, IuserData, IcurrentUserDataFromBe } from "../atoms";
+import { userInfoDataAtom, currentUserDataAtom, allUserDatasAtom, mlResultAtom, IuserData, IUserDataFromBe, TgoogleId } from "../atoms";
 import { useNavigate } from "react-router-dom";
 
 
@@ -14,6 +14,8 @@ export default function Matching(){
     const [allUserDatas,setAllUserDatas] = useRecoilState(allUserDatasAtom);
     const [mlResult,setMlResult] = useRecoilState(mlResultAtom);
     const [youtubeApiFin,setYoutubeApiFin] = useState(false);
+    const [getAllUserDatasFromBEFin,setGetAllUserDatasFromBEFin] = useState(false);
+
 
         // 1. 회원가입 하는 유저
             // 1) googleID 받아서 -> setCurrentUSerData
@@ -39,14 +41,14 @@ export default function Matching(){
 
             const {data : InsertCurrentUserDataOnServerSuccess} = useQuery<QueryStatus>("InsertCurrentUserData",()=> fetchPostUpdateCurrentUserInfoOnBE(currentUserData),{onSuccess : onUpdateCurrentUserInfoOnBESuccess,onError: onUpdateCurrentUserInfoOnBEError,enabled:Boolean(googleId&&userInfoData.age)});
         // 2. 로그인 하는 유저
-        const onCurrentUserDataSuccess = (data : IcurrentUserDataFromBe) => {
+        const onCurrentUserDataSuccess = (data : IUserDataFromBe) => {
             console.log("TLqkf")
             setCurrentUserData({googleId:data.google_id,name:data.name,age:data.age});
         }
         const onCurrentUserDataError = () => {
             console.log("failed to get currentUserData from server")
         }
-        const {isLoading : currentUserDataLoading, data : currentUserData_BE} = useQuery<{google_id:string,name:string,age:number}>("currentUserData_BE",fetchGetCurrentUserData,{onSuccess : onCurrentUserDataSuccess,enabled:Boolean(!userInfoData.age)})
+        const {data : currentUserData_BE} = useQuery<{google_id:string,name:string,age:number}>("currentUserData_BE",fetchGetCurrentUserData,{onSuccess : onCurrentUserDataSuccess,enabled:Boolean(!userInfoData.age)})
 
         // youtube_api 갱신
         const onSaveYoutubeApiSuccess = () => {
@@ -54,17 +56,32 @@ export default function Matching(){
             setYoutubeApiFin(true);
         }
 
-        const {isLoading : youtube_apiLoading , data: youtube_apiResult} = useQuery<QueryStatus>("youtube_apiResult",fetchGetSaveYoutubeApi,{onSuccess:onSaveYoutubeApiSuccess,enabled:Boolean(googleId||currentUserData_BE)})
+        const {data: youtube_apiResult} = useQuery<QueryStatus>("youtube_apiResult",fetchGetSaveYoutubeApi,{onSuccess:onSaveYoutubeApiSuccess,enabled:Boolean(googleId||currentUserData_BE)})
+
+        // 전체 유저 데이터 받아오기
+        const onGetAllUserDatasSuccess = (data: IUserDataFromBe[]) => {
+            // google_id를 googleId 로 변경
+            const newAllUserDatas = data.map(userDataFromBE => {
+                const userDataOnFE = {
+                    googleId : userDataFromBE.google_id,
+                    name : userDataFromBE.name,
+                    age : userDataFromBE.age
+                }
+                return userDataOnFE
+            })
+            setAllUserDatas(newAllUserDatas);
+            setGetAllUserDatasFromBEFin(true);
+        }
+
+        const {data:allUserDatasFromBE} = useQuery<IUserDataFromBe[]>("allUserDatasFromBE",fetchGetallUserDatas,{onSuccess:onGetAllUserDatasSuccess,enabled:youtubeApiFin})
 
         // 매칭
-        const onMatchingSuccess = (data : ImatchingResult) => {
+        const onMatchingSuccess = (data : TgoogleId[]) => {
+            setMlResult(data);
             setMatchingFinished(true);
-            setAllUserDatas(data.allUserDatas);
-            setMlResult(data.mlResult);
             navigate('/home')
         }
-        const {isLoading : matching , data: matchingResult} = useQuery<ImatchingResult>("matchingResult",fetchGetMatching,{onSuccess : onMatchingSuccess , enabled:youtubeApiFin})
-
+        const {isLoading : matching , data: matchingResult} = useQuery<TgoogleId[]>("matchingResult",fetchGetMatch,{onSuccess : onMatchingSuccess , enabled:getAllUserDatasFromBEFin})
 
     return (
         <>

@@ -1,26 +1,22 @@
 import {atom} from "recoil";
+
+export type TgoogleId = string;
 interface IuserInfoData {
     name:string;
     age:number;
 }
 
 export interface IuserData {
-    googleId:string;
+    googleId:TgoogleId;
     name:string;
     age:number;
 }
 
-export interface IcurrentUserDataFromBe {
-    google_id:string;
+export interface IUserDataFromBe {
+    google_id:TgoogleId;
     name:string;
     age:number;
 }
-
-export interface ImatchingResult {
-    allUserDatas : IuserData[];
-    mlResult : string[];
-}
-
 
 export const isLightModeAtom = atom({
     key:"isLightMode",
@@ -42,7 +38,7 @@ export const currentUserDataAtom = atom<IuserData>({
     default : {} as any
 });
 
-export const mlResultAtom = atom<string[]>({
+export const mlResultAtom = atom<TgoogleId[]>({
     key : "mlResult",
     default : []
 })
