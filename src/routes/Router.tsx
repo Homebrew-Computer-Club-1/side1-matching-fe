@@ -7,6 +7,7 @@ import { InputName, InputAge } from "../components/InputUserInfo/InputTemplates"
 import Matching from "./Matching";
 import Home from "./Home";
 import MyPage from "./MyPage";
+import { UserDetail } from "./UserDetail";
 
 export default function Router(){
     const location = useLocation();
@@ -26,6 +27,7 @@ export default function Router(){
                     <Route path="/matching" element={<Matching/>}></Route>
                     <Route path="/home" element={<Home/>}></Route>
                     <Route path="/mypage" element={<MyPage/>}></Route>
+                    <Route path="/user-detail/:googleId" element={<UserDetail/>}></Route>
                 </Routes>
             </CSSTransition>
         </TransitionGroup>
