@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import App from './App';
 import {QueryClient, QueryClientProvider} from "react-query";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
