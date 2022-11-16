@@ -1,4 +1,8 @@
+import { useEffect } from "react";
+import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
+import { fetchGetLoginCheck } from "../api";
 const youtubeLogo = require("../images/youtube.png");
 
 const Wrapper = styled.div`
@@ -32,9 +36,17 @@ const LoginWrapper = styled.div`
   `
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const onClickLoginBtn = () => {
     window.location.replace(`${process.env.REACT_APP_SERVER_URL}/auth/google`)
   }
+
+  const onLoginCheckSuccess = (data : {loggedIn : Boolean})=>{
+    if (data.loggedIn){
+      navigate('/matching')
+    }
+  }
+  const {data:loginCheckData} = useQuery('login-check',fetchGetLoginCheck,{onSuccess : onLoginCheckSuccess})
 
   return (
     <Wrapper>

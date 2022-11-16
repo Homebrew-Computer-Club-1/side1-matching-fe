@@ -3,6 +3,10 @@ import { QueryStatus } from "react-query";
 import { IUserDataFromBe, IuserData, TgoogleId } from "./atoms";
 
 
+export function fetchGetLoginCheck(){
+    return axios.get<{loggedIn:Boolean}>(`/login-check`,{withCredentials:true}).then(res => res.data)
+}
+
 
 export function fetchPostUpdateCurrentUserInfoOnBE(userData : IuserData){
     return axios.post<QueryStatus>(`/update-user-info`,userData,{withCredentials:true}).then(res => res.data)
