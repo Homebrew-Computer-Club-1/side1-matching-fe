@@ -31,3 +31,7 @@ export function fetchGetSaveYoutubeApi(){
 export function fetchGetallUserDatas(){
     return axios.get<IUserDataFromBe[]>(`/get-all-user-datas`,{withCredentials:true}).then(res => res.data)
 };
+
+export function fetchGetLogout(){
+    return axios.get<QueryStatus>(`/logout`,{withCredentials:true}).then(res => res.status)
+}

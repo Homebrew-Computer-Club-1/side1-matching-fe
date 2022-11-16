@@ -44,7 +44,7 @@ export default function LoginPage() {
   const onLoginCheckSuccess = (data : {loggedIn : Boolean})=>{
     if (data.loggedIn){
       navigate('/matching')
-    }
+    } 
   }
   const {data:loginCheckData} = useQuery('login-check',fetchGetLoginCheck,{onSuccess : onLoginCheckSuccess})
 
