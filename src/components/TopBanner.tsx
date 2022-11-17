@@ -10,37 +10,34 @@ import {
     findIconDefinition
   } from '@fortawesome/fontawesome-svg-core'
 library.add(fas)
-const homeLookup : IconLookup = { prefix :'fas', iconName:'house'}
-const homeIconDefinition : IconDefinition = findIconDefinition(homeLookup);
-const myPageLookup : IconLookup = {prefix : 'fas', iconName:'user'}
-const myPageIconDefinition : IconDefinition = findIconDefinition(myPageLookup);
+const linkLookup : IconLookup = { prefix :'fas', iconName:'link'}
+const linkIconDefinition : IconDefinition = findIconDefinition(linkLookup);
+
 //
 
 
 const Wrapper = styled.div`
     width:100%; height:50px;
-    background-color: ${props => props.theme.bgColor};
-
     display:flex;
     align-items: center;
     justify-content: space-evenly;
 
-    position:absolute; bottom: 10px;
-
     div {
-        color:white;
-        font-size: 25px;
+        color:${props => props.theme.bgColor};
+        font-size: 35px;
+        font-family: Noto Sans CJK KR;
+        font-style: normal;
+        font-weight: 500;
         width: 45%;
         text-align: center;
     }
 `
 
-export function NavBar(){
+export function TopBanner(){
     const navigate = useNavigate();
     return (
         <Wrapper>
-            <div onClick = {()=>{navigate('/home')}}><FontAwesomeIcon icon={homeIconDefinition} /></div>
-            <div onClick = {()=>{navigate('/mypage')}}><FontAwesomeIcon icon={myPageIconDefinition}/></div>
+            <div onClick = {()=>{navigate('/home')}}><FontAwesomeIcon icon={linkIconDefinition}/> Link </div>
         </Wrapper>
     )
 }

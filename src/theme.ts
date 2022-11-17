@@ -8,7 +8,7 @@ export const darkTheme : DefaultTheme = {
 }
 
 export const lightTheme : DefaultTheme = {
-    bgColor: "white",
-    textColor: "black",
-    btnColor: "tomato",
+    bgColor: "rgba(230, 50, 34)", // youtube red color
+    textColor: "white",
+    btnColor: "rgba(230, 50, 34)",
 }

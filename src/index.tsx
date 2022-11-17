@@ -4,7 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import App from './App';
 import {QueryClient, QueryClientProvider} from "react-query";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import ReactModal from 'react-modal';
+ReactModal.setAppElement('#root');
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
@@ -15,7 +18,7 @@ root.render(
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <App />
+            <App />
         </BrowserRouter>
       </QueryClientProvider>
     </RecoilRoot>

@@ -4,6 +4,7 @@ import { allUserDatasAtom, currentUserDataAtom, IuserData, mlResultAtom, Tgoogle
 import UserCard from "../components/Home/UserCard";
 import styled from "styled-components";
 import { NavBar } from "../components/NavBar";
+import { TopBanner } from "../components/TopBanner";
 
 
 
@@ -41,8 +42,7 @@ export default function Home(){
 
     return (
         <>
-            <h1>this is home</h1>
-        
+            <TopBanner/>
             <UserCardContainer>
                 {sortedAllUserDatas.map(userData => 
                     <UserCard key={userData.googleId} googleId = {userData.googleId} name={userData.name} age={userData.age}></UserCard>  
