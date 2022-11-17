@@ -30,7 +30,7 @@ export default function Matching(){
                     return newData
                 });
                 setGetGoogleIdFin(true);
-                console.log('GetGoogleIdFin')
+                console.log('GetGoogleIdFin',data)
             }
             const onGoogleIdError = () => {
                 console.log("failed to get googleId from server")
@@ -52,7 +52,7 @@ export default function Matching(){
         const onGetCurrentUserDataSuccess = (data : IUserDataFromBe) => {
             setCurrentUserData({googleId:data.google_id,name:data.name,age:data.age});
             setGetCurrentUserDataFin(true);
-            console.log('GetCurrentUserDataFin')
+            console.log('GetCurrentUserDataFin',data)
         }
         const onGetCurrentUserDataError = () => {
             console.log("failed to get currentUserData from server")
@@ -82,7 +82,7 @@ export default function Matching(){
         })
         setAllUserDatas(newAllUserDatas);
         setGetAllUserDatasFromBEFin(true);
-        console.log('GetAllUserDatasFromBEFin')
+        console.log('GetAllUserDatasFromBEFin',data)
     }
 
     const {data:allUserDatasFromBE} = useQuery<IUserDataFromBe[]>("allUserDatasFromBE",fetchGetallUserDatas,{onSuccess:onGetAllUserDatasSuccess,enabled:youtubeApiFin})
