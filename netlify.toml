@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/proxy/*"
+  to = "https://side1-matching.herokuapp.com/:splat"
+  status = 200
+  force = true
