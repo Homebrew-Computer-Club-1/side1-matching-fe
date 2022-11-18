@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/Homebrew-Computer-Club-1/side1-matching-be/static/css/main.819e8091.css",
-    "main.js": "/Homebrew-Computer-Club-1/side1-matching-be/static/js/main.242f233b.js",
-    "static/media/NotoSansKR-Light.otf": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Light.7d4ce2f6f92cffc70600.otf",
-    "static/media/NotoSansKR-Bold.otf": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Bold.bbb4ca5df6c6540f4af8.otf",
-    "static/media/NotoSansKR-Regular.otf": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Regular.bf54b090356010039bab.otf",
-    "static/media/NotoSansKR-Medium.otf": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Medium.7def03a7e5e60c5e0704.otf",
-    "static/media/NotoSansKR-Bold.woff": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Bold.bccfd5fe964d7e12ae44.woff",
-    "static/media/NotoSansKR-Regular.woff": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Regular.957d49ad23632e4a9349.woff",
-    "static/media/NotoSansKR-Medium.woff": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Medium.865a70c3c4af55e98eb5.woff",
-    "static/media/NotoSansKR-Light.woff": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Light.45736342560b8c933202.woff",
-    "static/media/NotoSansKR-Regular.woff2": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Regular.e95adf0e9aeddac43f42.woff2",
-    "static/media/NotoSansKR-Bold.woff2": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Bold.a4ecc3f7a43f7d43ce24.woff2",
-    "static/media/NotoSansKR-Medium.woff2": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Medium.e5d0c16f11ebac0c56d2.woff2",
-    "static/media/NotoSansKR-Light.woff2": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/NotoSansKR-Light.e2557c2be18ddd169ee9.woff2",
-    "static/media/youtube.png": "/Homebrew-Computer-Club-1/side1-matching-be/static/media/youtube.5693aec5baaa963965b6.png",
-    "index.html": "/Homebrew-Computer-Club-1/side1-matching-be/index.html",
-    "main.819e8091.css.map": "/Homebrew-Computer-Club-1/side1-matching-be/static/css/main.819e8091.css.map",
-    "main.242f233b.js.map": "/Homebrew-Computer-Club-1/side1-matching-be/static/js/main.242f233b.js.map"
+    "main.css": "/side1-matching-fe/static/css/main.5934f3b9.css",
+    "main.js": "/side1-matching-fe/static/js/main.615bb232.js",
+    "static/media/NotoSansKR-Light.otf": "/side1-matching-fe/static/media/NotoSansKR-Light.7d4ce2f6f92cffc70600.otf",
+    "static/media/NotoSansKR-Bold.otf": "/side1-matching-fe/static/media/NotoSansKR-Bold.bbb4ca5df6c6540f4af8.otf",
+    "static/media/NotoSansKR-Regular.otf": "/side1-matching-fe/static/media/NotoSansKR-Regular.bf54b090356010039bab.otf",
+    "static/media/NotoSansKR-Medium.otf": "/side1-matching-fe/static/media/NotoSansKR-Medium.7def03a7e5e60c5e0704.otf",
+    "static/media/NotoSansKR-Bold.woff": "/side1-matching-fe/static/media/NotoSansKR-Bold.bccfd5fe964d7e12ae44.woff",
+    "static/media/NotoSansKR-Regular.woff": "/side1-matching-fe/static/media/NotoSansKR-Regular.957d49ad23632e4a9349.woff",
+    "static/media/NotoSansKR-Medium.woff": "/side1-matching-fe/static/media/NotoSansKR-Medium.865a70c3c4af55e98eb5.woff",
+    "static/media/NotoSansKR-Light.woff": "/side1-matching-fe/static/media/NotoSansKR-Light.45736342560b8c933202.woff",
+    "static/media/NotoSansKR-Regular.woff2": "/side1-matching-fe/static/media/NotoSansKR-Regular.e95adf0e9aeddac43f42.woff2",
+    "static/media/NotoSansKR-Bold.woff2": "/side1-matching-fe/static/media/NotoSansKR-Bold.a4ecc3f7a43f7d43ce24.woff2",
+    "static/media/NotoSansKR-Medium.woff2": "/side1-matching-fe/static/media/NotoSansKR-Medium.e5d0c16f11ebac0c56d2.woff2",
+    "static/media/NotoSansKR-Light.woff2": "/side1-matching-fe/static/media/NotoSansKR-Light.e2557c2be18ddd169ee9.woff2",
+    "static/media/youtube.png": "/side1-matching-fe/static/media/youtube.5693aec5baaa963965b6.png",
+    "index.html": "/side1-matching-fe/index.html",
+    "main.5934f3b9.css.map": "/side1-matching-fe/static/css/main.5934f3b9.css.map",
+    "main.615bb232.js.map": "/side1-matching-fe/static/js/main.615bb232.js.map"
   },
   "entrypoints": [
-    "static/css/main.819e8091.css",
-    "static/js/main.242f233b.js"
+    "static/css/main.5934f3b9.css",
+    "static/js/main.615bb232.js"
   ]
 }
