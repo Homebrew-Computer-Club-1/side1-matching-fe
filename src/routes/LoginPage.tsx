@@ -38,7 +38,7 @@ const LoginWrapper = styled.div`
 export default function LoginPage() {
   const navigate = useNavigate();
   const onClickLoginBtn = () => {
-    window.location.replace(`${process.env.REACT_APP_SERVER_URL}/auth/google`)
+    window.location.replace(`/api/auth/google`)
   }
 
   const onLoginCheckSuccess = (data : {loggedIn : Boolean})=>{
