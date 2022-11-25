@@ -4,18 +4,20 @@ export type TgoogleId = string;
 interface IuserInfoData {
     name:string;
     age:number;
+    tel:string;
+    [key:string] : any; // required false인거 수정 필요.
+
 }
 
-export interface IuserData {
+export interface IuserData extends IuserInfoData {
     googleId:TgoogleId;
-    name:string;
-    age:number;
 }
 
 export interface IUserDataFromBe {
     google_id:TgoogleId;
     name:string;
     age:number;
+    tel:string;
 }
 
 export const isLightModeAtom = atom({

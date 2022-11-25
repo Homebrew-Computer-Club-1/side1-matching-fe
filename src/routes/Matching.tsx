@@ -50,14 +50,14 @@ export default function Matching(){
 
         // 2) 로그인 하는 유저
         const onGetCurrentUserDataSuccess = (data : IUserDataFromBe) => {
-            setCurrentUserData({googleId:data.google_id,name:data.name,age:data.age});
+            setCurrentUserData({googleId:data.google_id,name:data.name,age:data.age,tel:data.tel});
             setGetCurrentUserDataFin(true);
             console.log('GetCurrentUserDataFin',data)
         }
         const onGetCurrentUserDataError = () => {
             console.log("failed to get currentUserData from server")
         }
-        const {data : currentUserData_BE} = useQuery<{google_id:string,name:string,age:number}>("currentUserData_BE",fetchGetCurrentUserData,{onSuccess : onGetCurrentUserDataSuccess,onError:onGetCurrentUserDataError,enabled:Boolean(!userInfoData.age)})
+        const {data : currentUserData_BE} = useQuery("currentUserData_BE",fetchGetCurrentUserData,{onSuccess : onGetCurrentUserDataSuccess,onError:onGetCurrentUserDataError,enabled:Boolean(!userInfoData.age)})
 
 
 
@@ -76,7 +76,8 @@ export default function Matching(){
             const userDataOnFE = {
                 googleId : userDataFromBE.google_id,
                 name : userDataFromBE.name,
-                age : userDataFromBE.age
+                age : userDataFromBE.age,
+                tel : userDataFromBE.tel
             }
             return userDataOnFE
         })

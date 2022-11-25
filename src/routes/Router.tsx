@@ -3,16 +3,16 @@ import LoginPage from "./LoginPage";
 import InputUserInfo from "./InputUserInfo";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import './transitionGroup.css'
-import { InputName, InputAge } from "../components/InputUserInfo/InputTemplates";
 import Matching from "./Matching";
 import Home from "./Home";
 import MyPage from "./MyPage";
 import { UserDetail } from "./UserDetail";
 import { defaultUserInfos } from "../allUserInfo";
+import {InputTemplate} from "../components/InputUserInfo/InputTemplates";
 
 export default function Router(){
     const location = useLocation();
-    const {essential : {input : defaultEssInputs},notEssential : {etc : defaultNotEssEtcs}} = defaultUserInfos;
+    const {input : defaultInputs} = defaultUserInfos;
     
     return (
         <TransitionGroup className="transitions-wrapper">
@@ -24,9 +24,15 @@ export default function Router(){
                 <Routes>
                     <Route path="/auth/login" element={<LoginPage/>}></Route>
                     <Route path="/auth/inputUserInfo" element={<InputUserInfo/>}>
-                        <Route path={`name`} element={<InputName/>}></Route>
-                        <Route path={`age`} element={<InputAge/>}></Route>
-
+                        {
+                            defaultInputs.map((defaultInput,index) => 
+                                <Route 
+                                    key = {index}
+                                    path = {`${defaultInput.infoName}`}
+                                    element={<InputTemplate validOptions = {defaultInput.vaildOptions} nextInfo = {defaultInputs[index+1]?.infoName} infoName = {defaultInput.infoName}/>}
+                                ></Route>
+                            )
+                        }
                     </Route>
                     <Route path="/matching" element={<Matching/>}></Route>
                     <Route path="/home" element={<Home/>}></Route>
