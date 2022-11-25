@@ -8,9 +8,12 @@ import Matching from "./Matching";
 import Home from "./Home";
 import MyPage from "./MyPage";
 import { UserDetail } from "./UserDetail";
+import { defaultUserInfos } from "../allUserInfo";
 
 export default function Router(){
     const location = useLocation();
+    const {essential : {input : defaultEssInputs},notEssential : {etc : defaultNotEssEtcs}} = defaultUserInfos;
+    
     return (
         <TransitionGroup className="transitions-wrapper">
             <CSSTransition
@@ -22,7 +25,8 @@ export default function Router(){
                     <Route path="/auth/login" element={<LoginPage/>}></Route>
                     <Route path="/auth/inputUserInfo" element={<InputUserInfo/>}>
                         <Route path={`name`} element={<InputName/>}></Route>
-                        <Route path={`age`} element={<InputAge/>}></Route>   
+                        <Route path={`age`} element={<InputAge/>}></Route>
+
                     </Route>
                     <Route path="/matching" element={<Matching/>}></Route>
                     <Route path="/home" element={<Home/>}></Route>

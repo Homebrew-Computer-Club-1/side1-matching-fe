@@ -34,5 +34,5 @@ export function fetchGetallUserDatas(){
 };
 
 export function fetchGetLogout(){
-    return axios.get<QueryStatus>(`/api/logout`,{withCredentials:true}).then(res => res.status)
+    return axios.get<QueryStatus>(`/api/logout`,{withCredentials:true}).then(res => {console.log(res);return res.status})
 }

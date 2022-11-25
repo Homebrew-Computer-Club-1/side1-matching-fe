@@ -4,6 +4,9 @@ import { useRef } from "react";
 import { useRecoilState } from "recoil";
 import { userInfoDataAtom } from "../../atoms";
 import {produce} from "immer";
+import {useForm} from 'react-hook-form';
+import { IdefaultUserInfos, TdefaultEssInput } from "../../allUserInfo";
+import { stringify } from "querystring";
 
 
 const Header = styled.h1`
@@ -26,6 +29,61 @@ const Input = styled.input`
     position: absolute;
     bottom:300px;
 `
+
+
+
+function InputEssInputTemplate(essInput : TdefaultEssInput ,regExp : RegExp,regExpErrMessage : string ,nextInfo : string){
+    interface Iform {
+        [key : string] : TdefaultEssInput;    
+    } 
+    const navigate = useNavigate();
+    const {register,watch, handleSubmit, formState : {errors}, setValue} = useForm<Iform>();
+    const [userInfoData,setUserInfoData] = useRecoilState(userInfoDataAtom);
+    const onValid = (data : Iform) => {
+        const currentValue = data[essInput]
+        setUserInfoData(current => {
+            navigate(`/auth/InputUserInfo/${nextInfo}`)
+            return produce(current,(draft) => {
+                draft.name = currentValue;
+                return draft;
+            })
+        })
+    }
+    return (
+        <Wrapper>
+            <Header>name</Header>
+            <form onSubmit={handleSubmit(onValid)}>
+                <Input {...register(`${essInput}`,{required : true , pattern : {value : regExp , message : regExpErrMessage}})} placeholder={`input your ${essInput}`} />
+                <NextPageBtn>다음 페이지로</NextPageBtn>
+                <span>{errors?.essInput?.message}</span>
+            </form>
+        </Wrapper>
+    )
+}
+
+
+
+
+function InputNotEssTemplate(){
+
+    return (
+        <Wrapper>
+            <Header>name</Header>
+            <NextPageBtn>다음 페이지로</NextPageBtn>
+            <Input placeholder="이름을 입력하세요"></Input>
+        </Wrapper>
+    )
+}
+
+
+
+
+
+
+
+
+
+
 
 
 export function InputName(){
@@ -89,4 +147,6 @@ export function InputAge(){
         </Wrapper>
     );
 }
+
+
 
