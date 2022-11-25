@@ -35,12 +35,12 @@ const LoginWrapper = styled.div`
     font-size: 10px;
   `
 
-const URL = window.location.hostname !== 'localhost' ? '' : 'http://localhost:8080';
+const ROOT_URL = window.location.hostname !== 'localhost' ? '' : 'http://localhost:8080';
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const onClickLoginBtn = () => {
-    window.location.replace(`${URL}/api/auth/google`)
+    window.location.replace(`${ROOT_URL}/api/auth/google`)
   }
 
   const onLoginCheckSuccess = (data : {loggedIn : Boolean})=>{

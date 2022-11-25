@@ -11,12 +11,12 @@ export function LogoutModal({isOpen,setLogoutModal} : ILogoutModal) {
     const navigate = useNavigate();
     const handleClose = () => setLogoutModal(false);
     const handleShow = () => setLogoutModal(true);
-    const logout = () => {
+    const logout = async () => {
         try {
-            fetchGetLogout();
+            await fetchGetLogout();
             navigate('/auth/login')
         } catch {
-            console.log('로그아웃 실패')
+                alert('로그아웃 실패')
         }
     }
 
