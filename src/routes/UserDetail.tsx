@@ -49,6 +49,7 @@ export function UserDetail(){
                     <UserDatas>
                         <p>user name : {userData?.name}</p>
                         <p>user age : {userData?.age}</p>
+                        <p>user tel : {userData?.tel}</p>
                     </UserDatas>
                 </UserInFoWrapper>
 

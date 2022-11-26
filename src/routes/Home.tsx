@@ -45,7 +45,7 @@ export default function Home(){
             <TopBanner/>
             <UserCardContainer>
                 {sortedAllUserDatas.map(userData => 
-                    <UserCard key={userData.googleId} googleId = {userData.googleId} name={userData.name} age={userData.age}></UserCard>  
+                    <UserCard key={userData.googleId} googleId = {userData.googleId} name={userData.name} age={userData.age} tel = {userData.tel}></UserCard>  
                 )}
             </UserCardContainer>
             <NavBar/>

@@ -29,7 +29,7 @@ export default function Router(){
                                 <Route 
                                     key = {index}
                                     path = {`${defaultInput.infoName}`}
-                                    element={<InputTemplate validOptions = {defaultInput.vaildOptions} nextInfo = {defaultInputs[index+1]?.infoName} infoName = {defaultInput.infoName}/>}
+                                    element={<InputTemplate validOptions = {defaultInput.vaildOptions} nextInfo = {defaultInputs[index+1] ? defaultInputs[index+1]?.infoName : "matching"} infoName = {defaultInput.infoName}/>}
                                 ></Route>
                             )
                         }

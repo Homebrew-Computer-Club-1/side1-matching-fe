@@ -44,7 +44,11 @@ export function InputTemplate({infoName,validOptions,nextInfo} : IInputTemplate)
     const onValid = (data : any) => {
         const currentValue = data[infoName]
         setUserInfoData(current => {
-            navigate(`/auth/InputUserInfo/${nextInfo}`)
+            if (nextInfo !== "matching"){
+                navigate(`/auth/InputUserInfo/${nextInfo}`)
+            } else {
+                navigate('/matching')
+            }
             return produce(current,(draft) => {
                 draft[infoName] = currentValue;
                 return draft;

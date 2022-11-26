@@ -60,6 +60,7 @@ export default function MyPage(){
                     <UserDetail>
                         <p>user name : {currentUserData.name}</p>
                         <p>user age : {currentUserData.age}</p>
+                        <p>user tel : {currentUserData.tel}</p>
                     </UserDetail>
                 </UserInFoWrapper>
 

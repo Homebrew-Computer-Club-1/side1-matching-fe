@@ -10,7 +10,7 @@ export function fetchGetLoginCheck(){
 
 
 export function fetchPostUpdateCurrentUserInfoOnBE(userData : IuserData){
-    return axios.post<QueryStatus>(`/api/update-user-info`,userData,{withCredentials:true}).then(res => res.data)
+    return axios.post<QueryStatus>(`/api/update-user-info`,userData,{withCredentials:true}).then(res => res.status)
 }
 
 
@@ -26,7 +26,7 @@ export function fetchGetMatch(){
 
 }
 export function fetchGetSaveYoutubeApi(){
-    return axios.get<QueryStatus>(`/api/youtube/save-youtube-data`,{withCredentials:true}).then(res => res.data)
+    return axios.get<QueryStatus>(`/api/youtube/save-youtube-data`,{withCredentials:true}).then(res => res.status)
 }
 
 export function fetchGetallUserDatas(){
@@ -34,5 +34,5 @@ export function fetchGetallUserDatas(){
 };
 
 export function fetchGetLogout(){
-    return axios.get<QueryStatus>(`/api/logout`,{withCredentials:true}).then(res => {console.log(res);return res.status})
+    return axios.get<QueryStatus>(`/api/logout`,{withCredentials:true}).then(res => res.status)
 }

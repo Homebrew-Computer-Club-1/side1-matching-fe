@@ -1,11 +1,18 @@
 import {atom} from "recoil";
 
 export type TgoogleId = string;
-interface IuserInfoData {
+interface IessUserInfo {
     name:string;
     age:number;
     tel:string;
-    [key:string] : any; // required false인거 수정 필요.
+}
+
+interface InotEssUserInfo {
+    [key:string] : any;
+}
+
+
+interface IuserInfoData extends IessUserInfo, Partial<InotEssUserInfo>{
 
 }
 
@@ -13,11 +20,8 @@ export interface IuserData extends IuserInfoData {
     googleId:TgoogleId;
 }
 
-export interface IUserDataFromBe {
+export interface IUserDataFromBe extends IessUserInfo, Partial<InotEssUserInfo>{
     google_id:TgoogleId;
-    name:string;
-    age:number;
-    tel:string;
 }
 
 export const isLightModeAtom = atom({

@@ -46,11 +46,14 @@ export default function Matching(){
             const onUpdateCurrentUserInfoOnBEError = () => {   
             }
 
-            const {data : InsertCurrentUserInfoOnBEResult} = useQuery<QueryStatus>("InsertCurrentUserData",()=> fetchPostUpdateCurrentUserInfoOnBE(currentUserData),{onSuccess : onUpdateCurrentUserInfoOnBESuccess,onError: onUpdateCurrentUserInfoOnBEError,enabled:getGoogleIdFin});
+            const {data : InsertCurrentUserInfoOnBEResult} = useQuery<QueryStatus>("UpdateCurrentUserData",()=> fetchPostUpdateCurrentUserInfoOnBE(currentUserData) as any,{onSuccess : onUpdateCurrentUserInfoOnBESuccess,onError: onUpdateCurrentUserInfoOnBEError,enabled:getGoogleIdFin});
 
         // 2) 로그인 하는 유저
         const onGetCurrentUserDataSuccess = (data : IUserDataFromBe) => {
-            setCurrentUserData({googleId:data.google_id,name:data.name,age:data.age,tel:data.tel});
+            const newData : any = data;
+            newData["googleId"] = newData["google_id"];
+            delete newData["google_id"];
+            setCurrentUserData(newData);
             setGetCurrentUserDataFin(true);
             console.log('GetCurrentUserDataFin',data)
         }
@@ -67,7 +70,7 @@ export default function Matching(){
         setYoutubeApiFin(true);
     }
 
-    const {data: youtube_apiResult} = useQuery<QueryStatus>("youtube_apiResult",fetchGetSaveYoutubeApi,{onSuccess:onSaveYoutubeApiSuccess,enabled:Boolean(updateCurrentUserInfoOnBEFin||getCurrentUserDataFin)})
+    const {data: youtube_apiResult} = useQuery<QueryStatus>("youtube_apiResult",fetchGetSaveYoutubeApi as any,{onSuccess:onSaveYoutubeApiSuccess,enabled:Boolean(updateCurrentUserInfoOnBEFin||getCurrentUserDataFin)})
 
     // 3. allUserDatas 받아오기
     const onGetAllUserDatasSuccess = (data: IUserDataFromBe[]) => {

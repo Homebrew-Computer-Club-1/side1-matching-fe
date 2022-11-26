@@ -22,11 +22,12 @@ interface IUserCard {
     googleId:TgoogleId
     name:string;
     age:number;
+    tel:string;
 }
 
 
 
-export default function UserCard({googleId,name,age}: IUserCard){
+export default function UserCard({googleId,name,age,tel}: IUserCard){
     const navigate = useNavigate();
     const onClickUserCard = (googleId : TgoogleId) => {
         navigate(`/user-detail/${googleId}`)
