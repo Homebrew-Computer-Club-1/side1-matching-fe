@@ -20,6 +20,8 @@ import {
 import { useState } from "react";
 import { LogoutModal } from "../components/Mypage/LogoutModal";
 library.add(fas)
+const defaultUserImg = require( "../images/defaultUserImg.png");
+
 const logoutBtnLookup : IconLookup = { prefix :'fas', iconName:'power-off'}
 const logoutBtnDefinition : IconDefinition = findIconDefinition(logoutBtnLookup);
 
@@ -28,21 +30,30 @@ const Wrapper = styled.div`
     font-family: Noto Sans CJK KR;
     display: flex;
     flex-direction: column;
+    position: relative;
 `
 
 const UserInFoWrapper = styled.div`
     display: flex;
-    padding:10px;
+    padding:10px 0;
 `
 
 const UserImg = styled.img`
-    background-color: green;
-    width:150px; height:150px;
+    padding:auto 10px;
+    width:130px; height:130px;
     margin:10px;
+    position: relative;
+    top:10px;
 `
-const UserDetail = styled.div`
-    
+const UserDetails = styled.div`
+    padding:20px 0px;
 `
+
+const UserDetail_name = styled.p`
+    font-size: 25px;
+    font-weight: 500;
+`
+
 const logoutBtnStyle = {
     fontSize:'30px',
     bottom:0,
@@ -56,18 +67,19 @@ export default function MyPage(){
             <Wrapper>
                 <TopBanner/>
                 <UserInFoWrapper>
-                    <UserImg></UserImg>
-                    <UserDetail>
-                        <p>user name : {currentUserData.name}</p>
+                    <UserImg src={defaultUserImg}></UserImg>
+                    <UserDetails>
+                        <UserDetail_name>{currentUserData.name}님, 환영합니다.</UserDetail_name>
                         <p>user age : {currentUserData.age}</p>
                         <p>user tel : {currentUserData.tel}</p>
-                    </UserDetail>
+                    </UserDetails>
                 </UserInFoWrapper>
 
                 <FontAwesomeIcon onClick={() => {setLogoutModal(true)}} style={logoutBtnStyle} icon={logoutBtnDefinition}/>
-                <NavBar/>
                 <LogoutModal isOpen = {logoutModal} setLogoutModal = {setLogoutModal} />
             </Wrapper>
+            <NavBar/>
+
         </>
     );
 }

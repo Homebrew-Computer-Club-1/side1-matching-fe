@@ -7,9 +7,24 @@ import {produce} from "immer";
 import {useForm} from 'react-hook-form';
 import { IvaildOptions } from "../../allUserInfo";
 
+//fa
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import {
+    IconLookup,
+    IconDefinition,
+    findIconDefinition
+  } from '@fortawesome/fontawesome-svg-core'
+library.add(fas)
+const rightArrowLookup : IconLookup = { prefix :'fas', iconName:'arrow-right'}
+const rightArrowIconDefinition : IconDefinition = findIconDefinition(rightArrowLookup);
+
 
 const Header = styled.h1`
-    color:tomato;
+    position : absolute;
+    top:60px;
+    color:${props => props.theme.textColor};
 `
 
 const Wrapper = styled.div`
@@ -17,25 +32,41 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
 `
-const NextPageBtn = styled.button`
-    position:absolute;
-    right:0;top:50%;
-    background-color: tomato;
-`
 const Input = styled.input`
     width:250px;
     height:40px;
     position: absolute;
-    bottom:300px;
+    bottom:20%;
+    right:50%;left:50%;
+    transform: translate(-50%, -50%);
 `
+
+const RightArrowBox = styled.button`
+    background-color: transparent;
+    border-color: transparent;
+    display:inline-block;
+    position:absolute;
+    right:10px;
+    top:45%;
+    font-size: 50px;
+`
+const ErrMessageBox = styled.p`
+    color : ${props => props.theme.textColor};
+    font-size: 15px;
+    position: absolute;
+    bottom:17%;right:35%;
+
+`
+
 
 interface IInputTemplate {
     infoName : string;
     validOptions : IvaildOptions;
     nextInfo : string;
+    headerMessage : string;
 }
 
-export function InputTemplate({infoName,validOptions,nextInfo} : IInputTemplate){
+export function InputTemplate({infoName,validOptions,nextInfo,headerMessage} : IInputTemplate){
     const navigate = useNavigate();
     const {register, handleSubmit, formState : {errors}, setValue} = useForm();
     const [userInfoData,setUserInfoData] = useRecoilState(userInfoDataAtom);
@@ -58,12 +89,12 @@ export function InputTemplate({infoName,validOptions,nextInfo} : IInputTemplate)
 
     return (
         <Wrapper>
-            <Header>{infoName}</Header>
+            <Header>{headerMessage}</Header>
             <form onSubmit={handleSubmit(onValid)}>
                 <Input {...register(`${infoName}`,{...validOptions})} placeholder={`input your ${infoName}`} />
-                <NextPageBtn>다음 페이지로</NextPageBtn>
+                <RightArrowBox><FontAwesomeIcon icon={rightArrowIconDefinition} /></RightArrowBox>
+                <ErrMessageBox>{errors[infoName]?.message as any}</ErrMessageBox>
             </form>
-            <p>{errors[infoName]?.message as any}</p>
         </Wrapper>
     )
 }

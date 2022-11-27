@@ -2,6 +2,7 @@ export const defaultUserInfos : IdefaultUserInfos = {
     input : [
         {
             infoName : "name" ,
+            headerMessage : "당신의 이름은 무엇인가요?",
             vaildOptions : {
                 required : "값을 입력해 주세요",
                 pattern : {
@@ -12,6 +13,7 @@ export const defaultUserInfos : IdefaultUserInfos = {
         },
         {
             infoName : "age" ,
+            headerMessage : "나이를 알려주세요!",
             vaildOptions : {
                 required : "값을 입력해 주세요",
                 pattern : {
@@ -22,6 +24,7 @@ export const defaultUserInfos : IdefaultUserInfos = {
         },
         {
             infoName : "tel" ,
+            headerMessage : "매칭후 다른 회원분들과 연락하기 위해, 전화번호를 알려주세요!",
             vaildOptions : {
                 required : "값을 입력해 주세요",
                 pattern : {
@@ -39,6 +42,7 @@ interface IdefaultUserInfos {
 
 interface IdefaultInput {
         infoName : string;
+        headerMessage : string;
         vaildOptions: IvaildOptions
 }
 

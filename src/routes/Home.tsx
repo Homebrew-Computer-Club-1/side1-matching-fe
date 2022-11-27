@@ -17,6 +17,7 @@ const ToMyPageBtn = styled.button`
 const UserCardContainer = styled.div`
     display:flex;
     flex-wrap: wrap;
+    padding:30px;
 `
 
 export default function Home(){

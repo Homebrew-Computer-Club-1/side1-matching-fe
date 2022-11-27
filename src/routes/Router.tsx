@@ -15,13 +15,13 @@ export default function Router(){
     const {input : defaultInputs} = defaultUserInfos;
     
     return (
-        <TransitionGroup className="transitions-wrapper">
-            <CSSTransition
-                key={location.pathname}
-                classNames={"right"}
-                timeout={300}
-            >
-                <Routes>
+        // <TransitionGroup className="transitions-wrapper">
+        //     <CSSTransition
+        //         key={location.pathname}
+        //         classNames={"right"}
+        //         timeout={500}
+        //     >
+                <Routes location={location}>
                     <Route path="/auth/login" element={<LoginPage/>}></Route>
                     <Route path="/auth/inputUserInfo" element={<InputUserInfo/>}>
                         {
@@ -29,7 +29,7 @@ export default function Router(){
                                 <Route 
                                     key = {index}
                                     path = {`${defaultInput.infoName}`}
-                                    element={<InputTemplate validOptions = {defaultInput.vaildOptions} nextInfo = {defaultInputs[index+1] ? defaultInputs[index+1]?.infoName : "matching"} infoName = {defaultInput.infoName}/>}
+                                    element={<InputTemplate validOptions = {defaultInput.vaildOptions} nextInfo = {defaultInputs[index+1] ? defaultInputs[index+1]?.infoName : "matching"} infoName = {defaultInput.infoName} headerMessage = {defaultInput.headerMessage}/>}
                                 ></Route>
                             )
                         }
@@ -39,7 +39,7 @@ export default function Router(){
                     <Route path="/mypage" element={<MyPage/>}></Route>
                     <Route path="/user-detail/:googleId" element={<UserDetail/>}></Route>
                 </Routes>
-            </CSSTransition>
-        </TransitionGroup>
+        //     </CSSTransition>
+        // </TransitionGroup>
     );
 }

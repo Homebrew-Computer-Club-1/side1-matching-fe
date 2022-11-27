@@ -19,7 +19,7 @@ const myPageIconDefinition : IconDefinition = findIconDefinition(myPageLookup);
 
 const Wrapper = styled.div`
     width:100%; height:50px;
-    background-color: ${props => props.theme.bgColor};
+    background-color: ${props => props.theme.normalColor};
 
     display:flex;
     align-items: center;

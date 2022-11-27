@@ -23,7 +23,7 @@ const Wrapper = styled.div`
     justify-content: space-evenly;
 
     div {
-        color:${props => props.theme.bgColor};
+        color:${props => props.theme.normalColor};
         font-size: 35px;
         font-family: Noto Sans CJK KR;
         font-style: normal;
