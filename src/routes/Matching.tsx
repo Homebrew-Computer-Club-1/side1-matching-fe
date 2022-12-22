@@ -6,6 +6,7 @@ import { userInfoDataAtom, currentUserDataAtom, allUserDatasAtom, mlResultAtom, 
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "../components/Matching/Spinner";
 import { MatchFinished } from "../components/Matching/MatchFinished";
+import { arrayBuffer } from "stream/consumers";
 
 export default function Matching(){
     // matching state
@@ -75,7 +76,7 @@ export default function Matching(){
     // 3. allUserDatas 받아오기
     const onGetAllUserDatasSuccess = (data: IUserDataFromBe[]) => {
         // google_id를 googleId 로 변경
-        const newAllUserDatas = data.map(userDataFromBE => {
+        const allUserDatasFromBE = data.map(userDataFromBE => {
             const userDataOnFE = {
                 googleId : userDataFromBE.google_id,
                 name : userDataFromBE.name,
@@ -84,6 +85,10 @@ export default function Matching(){
             }
             return userDataOnFE
         })
+        
+        const newAllUserDatas = allUserDatasFromBE.filter(userData => userData.googleId !== currentUserData.googleId)
+
+
         setAllUserDatas(newAllUserDatas);
         setGetAllUserDatasFromBEFin(true);
         console.log('GetAllUserDatasFromBEFin',data)
