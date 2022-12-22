@@ -24,6 +24,9 @@ export interface IUserDataFromBe extends IessUserInfo, Partial<InotEssUserInfo>{
     google_id:TgoogleId;
 }
 
+export type TmlResult = TgoogleId[];
+
+
 export const isLightModeAtom = atom({
     key:"isLightMode",
     default:true,
@@ -44,7 +47,7 @@ export const currentUserDataAtom = atom<IuserData>({
     default : {} as any
 });
 
-export const mlResultAtom = atom<TgoogleId[]>({
+export const mlResultAtom = atom<TmlResult>({
     key : "mlResult",
     default : []
 })

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { QueryStatus } from "react-query";
-import { IUserDataFromBe, IuserData, TgoogleId } from "./atoms";
+import { IUserDataFromBe, IuserData, TgoogleId, TmlResult } from "./atoms";
 
 // const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
 
@@ -22,7 +22,7 @@ export function fetchGetCurrentUserData(){
     return axios.get<IUserDataFromBe>(`/api/get-current-user-data`,{withCredentials:true}).then(res => res.data)
 }
 export function fetchGetMatch(){
-    return axios.get<TgoogleId[]>(`/api/match`,{withCredentials:true}).then(res => res.data)
+    return axios.get<TmlResult>(`/api/match`,{withCredentials:true}).then(res => res.data)
 
 }
 export function fetchGetSaveYoutubeApi(){

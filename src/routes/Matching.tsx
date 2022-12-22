@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil"
 import { fetchPostUpdateCurrentUserInfoOnBE, fetchGetGoogleId, fetchGetCurrentUserData,fetchGetMatch, fetchGetSaveYoutubeApi, fetchGetallUserDatas } from "../api";
 import {QueryStatus, useQuery} from "react-query";
-import { userInfoDataAtom, currentUserDataAtom, allUserDatasAtom, mlResultAtom, IuserData, IUserDataFromBe, TgoogleId } from "../atoms";
+import { userInfoDataAtom, currentUserDataAtom, allUserDatasAtom, mlResultAtom, IuserData, IUserDataFromBe, TgoogleId, TmlResult } from "../atoms";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "../components/Matching/Spinner";
 import { MatchFinished } from "../components/Matching/MatchFinished";
@@ -97,13 +97,13 @@ export default function Matching(){
     const {data:allUserDatasFromBE} = useQuery<IUserDataFromBe[]>("allUserDatasFromBE",fetchGetallUserDatas,{onSuccess:onGetAllUserDatasSuccess,enabled:youtubeApiFin})
 
     // 4. 매칭
-    const onMatchingSuccess = (data : TgoogleId[]) => {
+    const onMatchingSuccess = (data : TmlResult) => {
         setMlResult(data);
         setMatchFin(true);
         setTimeout(function(){
         },1000)
     }
-    const {data: matchingResult} = useQuery<TgoogleId[]>("matchingResult",fetchGetMatch,{onSuccess : onMatchingSuccess , enabled:getAllUserDatasFromBEFin})
+    const {data: matchingResult} = useQuery<TmlResult>("matchingResult",fetchGetMatch,{onSuccess : onMatchingSuccess , enabled:getAllUserDatasFromBEFin})
 
     return (
         <>
