@@ -50,6 +50,7 @@ export default function LoginPage() {
   }
   const {data:loginCheckData} = useQuery('login-check',fetchGetLoginCheck,{onSuccess : onLoginCheckSuccess})
 
+
   return (
     <Wrapper>
       <Title>Matching Service</Title>

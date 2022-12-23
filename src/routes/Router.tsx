@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
+import {  Routes, Route, useLocation } from "react-router-dom"
 import LoginPage from "./LoginPage";
 import InputUserInfo from "./InputUserInfo";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -9,20 +9,18 @@ import MyPage from "./MyPage";
 import { UserDetail } from "./UserDetail";
 import { defaultUserInfos } from "../allUserInfo";
 import {InputTemplate} from "../components/InputUserInfo/InputTemplates";
+import PrivateRoute from "./PrivateRoute";
+import isLoginAtom from "../atoms";
+import { useRecoilValue } from "recoil";
 
 export default function Router(){
     const location = useLocation();
     const {input : defaultInputs} = defaultUserInfos;
-    
+    const isLogin = useRecoilValue(isLoginAtom);
+    console.log("로그인?" , isLogin);
     return (
-        // <TransitionGroup className="transitions-wrapper">
-        //     <CSSTransition
-        //         key={location.pathname}
-        //         classNames={"right"}
-        //         timeout={500}
-        //     >
                 <Routes location={location}>
-                    <Route path="/auth/login" element={<LoginPage/>}></Route>
+                    <Route path="/auth/login" element={<PrivateRoute isLogin = {isLogin} opposite = {true} component = {<LoginPage/>}/>}></Route>
                     <Route path="/auth/inputUserInfo" element={<InputUserInfo/>}>
                         {
                             defaultInputs.map((defaultInput,index) => 
@@ -39,7 +37,5 @@ export default function Router(){
                     <Route path="/mypage" element={<MyPage/>}></Route>
                     <Route path="/user-detail/:googleId" element={<UserDetail/>}></Route>
                 </Routes>
-        //     </CSSTransition>
-        // </TransitionGroup>
     );
 }
