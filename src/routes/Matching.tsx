@@ -6,8 +6,6 @@ import { userInfoDataAtom, currentUserDataAtom, allUserDatasAtom, mlResultAtom, 
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "../components/Matching/Spinner";
 import { MatchFinished } from "../components/Matching/MatchFinished";
-import { arrayBuffer } from "stream/consumers";
-
 export default function Matching(){
     // matching state
     const [getGoogleIdFin,setGetGoogleIdFin] = useState(false);
@@ -16,12 +14,13 @@ export default function Matching(){
     const [youtubeApiFin,setYoutubeApiFin] = useState(false);
     const [getAllUserDatasFromBEFin,setGetAllUserDatasFromBEFin] = useState(false);
     const [matchFin,setMatchFin] = useState(false);
-
+    
     const userInfoData = useRecoilValue(userInfoDataAtom);
     const [currentUserData,setCurrentUserData] = useRecoilState(currentUserDataAtom);
     const [allUserDatas,setAllUserDatas] = useRecoilState(allUserDatasAtom);
     const [mlResult,setMlResult] = useRecoilState(mlResultAtom);
-
+    
+    
     //1. 회원가입 / 로그인 처리
         // 1) 회원가입 하는 유저
             // (1) googleID 받아서 -> setCurrentUSerData

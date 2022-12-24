@@ -51,13 +51,3 @@ export const mlResultAtom = atom<TmlResult>({
     key : "mlResult",
     default : []
 })
-
-const isLoginAtom = selector({
-    key : 'isLogin',
-    get : ({get}) => {
-        const currentUserData = get(currentUserDataAtom);
-        return !!currentUserData.googleId
-    }
-})
-
-export default isLoginAtom;

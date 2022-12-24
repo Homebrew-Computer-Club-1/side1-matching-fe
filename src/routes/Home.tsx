@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import isLogin, { allUserDatasAtom, currentUserDataAtom, IuserData, mlResultAtom, TgoogleId } from "../atoms";
+import { allUserDatasAtom, currentUserDataAtom, IuserData, mlResultAtom, TgoogleId } from "../atoms";
 import UserCard from "../components/Home/UserCard";
 import styled from "styled-components";
 import { NavBar } from "../components/NavBar";
 import { TopBanner } from "../components/TopBanner";
-import isLoginAtom from "../atoms";
-
+import { useNavigate } from "react-router-dom";
 
 
 const ToMyPageBtn = styled.button`
@@ -51,9 +50,12 @@ export default function Home(){
     const [sortedNotSuitedUserDatas,setSortedNotSuitedUserDatas] = useState<IuserData[]>([]);
     const currentUserData = useRecoilValue(currentUserDataAtom);
 
-    const isLogin = useRecoilValue(isLoginAtom);
-    console.log('로그인 상태',isLogin)
+    const navigate = useNavigate();
+
+
     
+
+
     const sortSuitedUserDatas = (allUserDatas : IuserData[]) => {
 
         // mlResult 받기

@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { currentUserDataAtom } from "../atoms";
 import { NavBar } from "../components/NavBar";
 import { fetchGetLogout } from "../api";
-import { useNavigate } from "react-router-dom";
 import { TopBanner } from "../components/TopBanner";
+
 
 
 
@@ -16,7 +16,7 @@ import {
     IconLookup,
     IconDefinition,
     findIconDefinition
-  } from '@fortawesome/fontawesome-svg-core'
+} from '@fortawesome/fontawesome-svg-core'
 import { useState } from "react";
 import { LogoutModal } from "../components/Mypage/LogoutModal";
 library.add(fas)
@@ -31,12 +31,12 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
-`
+    `
 
 const UserInFoWrapper = styled.div`
     display: flex;
     padding:10px 0;
-`
+    `
 
 const UserImg = styled.img`
     padding:auto 10px;
@@ -44,15 +44,15 @@ const UserImg = styled.img`
     margin:10px;
     position: relative;
     top:10px;
-`
+    `
 const UserDetails = styled.div`
     padding:20px 0px;
-`
+    `
 
 const UserDetail_name = styled.p`
     font-size: 25px;
     font-weight: 500;
-`
+    `
 
 const logoutBtnStyle = {
     fontSize:'30px',

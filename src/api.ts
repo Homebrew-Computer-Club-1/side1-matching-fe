@@ -1,13 +1,16 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { QueryStatus } from "react-query";
 import { IUserDataFromBe, IuserData, TgoogleId, TmlResult } from "./atoms";
 
 // const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
 
 export function fetchGetLoginCheck(){
-    return axios.get<{loggedIn:Boolean}>(`/api/login-check`,{withCredentials:true}).then(res => res.data)
+    return axios.get<number>(`/api/auth/login-check`,{withCredentials:true}).then(res => res.status);
 }
-
+    
+    export const onLoginCheckSuccess = (statusCode : number, setIsLogin : React.Dispatch<React.SetStateAction<boolean>>) => {
+        setIsLogin(true);
+    }
 
 export function fetchPostUpdateCurrentUserInfoOnBE(userData : IuserData){
     return axios.post<QueryStatus>(`/api/update-user-info`,userData,{withCredentials:true}).then(res => res.status)
