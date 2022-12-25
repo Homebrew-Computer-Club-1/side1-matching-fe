@@ -5,6 +5,7 @@ import { IUserDataFromBe, IuserData, TgoogleId, TmlResult } from "./atoms";
 // const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
 
 export function fetchGetLoginCheck(){
+    console.log('login-check')
     return axios.get<number>(`/api/auth/login-check`,{withCredentials:true}).then(res => res.status);
 }
     
