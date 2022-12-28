@@ -10,6 +10,7 @@ export function fetchGetLoginCheck(){
 }
     
     export const onLoginCheckSuccess = (statusCode : number, setIsLogin : React.Dispatch<React.SetStateAction<boolean>>) => {
+        console.log('check fin')
         setIsLogin(true);
     }
 

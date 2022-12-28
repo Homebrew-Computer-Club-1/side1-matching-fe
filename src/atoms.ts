@@ -1,4 +1,5 @@
 import {atom, selector} from "recoil";
+import { recoilPersist } from "recoil-persist";
 
 export type TgoogleId = string;
 interface IessUserInfo {
@@ -27,27 +28,45 @@ export interface IUserDataFromBe extends IessUserInfo, Partial<InotEssUserInfo>{
 export type TmlResult = TgoogleId[];
 
 
+const { persistAtom } = recoilPersist({
+    key : 'recoil_persist',
+    storage:localStorage,
+})
+
+
 export const isLightModeAtom = atom({
     key:"isLightMode",
     default:true,
+    effects_UNSTABLE : [persistAtom]
 })
+
 
 export const userInfoDataAtom = atom<IuserInfoData>({
     key:"userInfoData",
-    default:{} as any
+    default:{} as any,
+    effects_UNSTABLE : [persistAtom]
 })
 
 export const allUserDatasAtom = atom<IuserData[]>({
     key:"allUserDatas",
-    default:[]
+    default:[],
+    effects_UNSTABLE : [persistAtom],
 })
 
 export const currentUserDataAtom = atom<IuserData>({
     key : "currentUserData",
-    default : {} as any
+    default : {} as any,
+    effects_UNSTABLE : [persistAtom],
 });
 
 export const mlResultAtom = atom<TmlResult>({
     key : "mlResult",
-    default : []
+    default : [],
+    effects_UNSTABLE : [persistAtom],
+})
+
+export const  inputUserInfoAvaiableAtom = atom<boolean>({
+    key: "inputUserInfoAvaiable",
+    default : true,
+    effects_UNSTABLE : [persistAtom]
 })

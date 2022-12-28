@@ -1,11 +1,12 @@
 import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
-import { useRecoilState } from "recoil";
-import { userInfoDataAtom } from "../../atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { inputUserInfoAvaiableAtom, userInfoDataAtom } from "../../atoms";
 import {produce} from "immer";
 import {useForm} from 'react-hook-form';
 import { IvaildOptions } from "../../allUserInfo";
+import { Navigate } from "react-router-dom";
 
 //fa
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -66,11 +67,18 @@ interface IInputTemplate {
     headerMessage : string;
 }
 
+
 export function InputTemplate({infoName,validOptions,nextInfo,headerMessage} : IInputTemplate){
     const navigate = useNavigate();
     const {register, handleSubmit, formState : {errors}, setValue} = useForm();
     const [userInfoData,setUserInfoData] = useRecoilState(userInfoDataAtom);
+    const inputUserInfoAvaiable = useRecoilValue(inputUserInfoAvaiableAtom);
 
+    if (!inputUserInfoAvaiable){
+        alert('잘못된 접근입니다.')
+        window.location.href = '/home'
+        // return <Navigate to="/home"/>
+    }
 
     const onValid = (data : any) => {
         const currentValue = data[infoName]
@@ -78,7 +86,7 @@ export function InputTemplate({infoName,validOptions,nextInfo,headerMessage} : I
             if (nextInfo !== "matching"){
                 navigate(`/auth/InputUserInfo/${nextInfo}`)
             } else {
-                navigate('/matching')
+                window.location.href = '/matching'
             }
             return produce(current,(draft) => {
                 draft[infoName] = currentValue;
@@ -86,6 +94,7 @@ export function InputTemplate({infoName,validOptions,nextInfo,headerMessage} : I
             })
         })
     }
+
 
     return (
         <Wrapper>

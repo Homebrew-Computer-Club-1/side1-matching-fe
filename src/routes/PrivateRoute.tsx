@@ -3,10 +3,9 @@ import { useNavigate, RouteProps, Outlet, Navigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { fetchGetLoginCheck, onLoginCheckSuccess } from '../api';
 import LoginChecking from "./LoginChecking";
-import { Route } from "react-router-dom";
+
 
 interface IPrivateRouteProps {
-    // children : React.ReactNode;
     opposite : boolean
 }
 
@@ -15,6 +14,7 @@ export default function PrivateRoute({opposite = false} : IPrivateRouteProps) {
 
     const [isLogin,setIsLogin] = useState(false);
     const {data : isLoginStatusCode , isLoading : isLoginLoading} = useQuery('login-check',fetchGetLoginCheck,{retry:0, onSuccess : (statusCode) => {onLoginCheckSuccess(statusCode as number,setIsLogin)}})
+
 
     if (isLoginLoading){
         return <LoginChecking/>

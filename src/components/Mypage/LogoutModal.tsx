@@ -18,7 +18,8 @@ export function LogoutModal({isOpen,setLogoutModal} : ILogoutModal) {
         try {
             await fetchGetLogout();
             resetCurrentUserData();
-            navigate('/auth/login')
+            window.location.href = '/auth/login';
+            // navigate('/auth/login')
         } catch {
             alert('로그아웃 실패')
         }
